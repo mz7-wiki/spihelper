@@ -14,6 +14,7 @@
     "types-mediawiki": "^1.2.0"
   },
   "scripts": {
+    "build": "python3 build.py",
     "test": "eslint spihelper.js"
   },
   "repository": {
