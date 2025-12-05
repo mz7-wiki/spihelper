@@ -1,5 +1,8 @@
 node_modules/
 
+# Avoid publishing the final spihelper.js
+# It is intended to be built using build.py instead
+spihelper.js
 
 # Editors
 .vscode/
