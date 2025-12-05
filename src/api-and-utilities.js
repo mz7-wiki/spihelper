@@ -851,6 +851,13 @@ function spiHelperGetArchiveName () {
     return spiHelperPageName + '/Archive'
 }
 
+// User role helper functions
+/**
+ * Whether the current user has admin permissions, used to determine
+ * whether to show block options
+ *
+ * @return {boolean} Whether the current user is an admin
+ */
 function spiHelperIsAdmin () {
   if (spiHelperSettings.debugForceAdminState !== null) {
     return spiHelperSettings.debugForceAdminState
