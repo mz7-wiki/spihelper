@@ -250,6 +250,8 @@ const spiHelperAdminTemplates = [
 const spiHelperCaseStatusRegex = /{{\s*SPI case status\s*\|?\s*(\S*?)\s*}}/i
 // Regex to match closed case statuses (close or closed)
 const spiHelperCaseClosedRegex = /^closed?$/i
+// Regex to match the closed case statuses with the full template string (used for optimized one-click archiving)
+const spiHelperCaseStatusClosedRegex = /{{\s*SPI case status\s*\|?\s*closed?\s*}}/i
 
 const spiHelperClerkStatusRegex = /{{(CURequest|awaitingadmin|clerk ?request|(?:self|requestand|cu)?endorse|inprogress|decline(?:-ip)?|moreinfo|relisted|onhold)}}/i
 
