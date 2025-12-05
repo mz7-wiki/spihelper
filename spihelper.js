@@ -1832,7 +1832,8 @@ async function spiHelperArchiveCase () {
   let sectionLines = []
 
   // Now we will iterate line by line through pageText and decide if the line
-  // should be appended to sectionsToArchiveLines, which we will then append to the archive.
+  // should be appended to textToArchiveLines, which we will then append to the archive,
+  // or textToKeepLines, which will remain on the case page.
   let inClosedSection = false
   for (const line of pageText.split('\n')) {
     if (spiHelperSectionRegex.test(line)) {
