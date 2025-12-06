@@ -251,7 +251,7 @@ const spiHelperCaseStatusRegex = /{{\s*SPI case status\s*\|?\s*(\S*?)\s*}}/i
 // Regex to match closed case statuses (close or closed)
 const spiHelperCaseClosedRegex = /^closed?$/i
 // Regex to match the closed case statuses with the full template string (used for optimized one-click archiving)
-const spiHelperCaseStatusClosedRegex = /{{\s*SPI case status\s*\|?\s*closed?\s*}}/i
+const spiHelperCaseStatusClosedRegex = /{{\s*SPI case status\s*\|?\s*closed?\s*}}/gi
 
 const spiHelperClerkStatusRegex = /{{(CURequest|awaitingadmin|clerk ?request|(?:self|requestand|cu)?endorse|inprogress|decline(?:-ip)?|moreinfo|relisted|onhold)}}/i
 
@@ -1825,7 +1825,7 @@ async function spiHelperArchiveCase () {
   let pageText = await spiHelperGetPageText(spiHelperPageName, true)
 
   // Remove all {{SPI case status|close(d)}} templates from the page text
-  pageText.replace(spiHelperCaseStatusClosedRegex, '')
+  pageText = pageText.replaceAll(spiHelperCaseStatusClosedRegex, '')
 
   let textToArchiveLines = []
   let textToKeepLines = []
@@ -1903,7 +1903,7 @@ async function spiHelperArchiveCase () {
   }
   archivetext += '\n' + textToArchive
   const archiveSuccess = await spiHelperEditPage(spiHelperGetArchiveName(), archivetext,
-    'Archiving closed cases from [[' + spiHelperGetInterwikiPrefix() + spiHelperPageName + ']]',
+    'Archiving closed section(s) from [[' + spiHelperGetInterwikiPrefix() + spiHelperPageName + ']]',
     false, spiHelperSettings.watchArchive, spiHelperSettings.watchArchiveExpiry)
 
   if (!archiveSuccess) {    
@@ -1912,7 +1912,7 @@ async function spiHelperArchiveCase () {
   }
 
   // Update case page to blank the sections we archived
-  await spiHelperEditPage(spiHelperPageName, textToKeep, 'Archiving closed cases to [[' + spiHelperGetInterwikiPrefix() + spiHelperGetArchiveName() + ']]',
+  await spiHelperEditPage(spiHelperPageName, textToKeep, 'Archiving closed section(s) to [[' + spiHelperGetInterwikiPrefix() + spiHelperGetArchiveName() + ']]',
     false, spiHelperSettings.watchCase, spiHelperSettings.watchCaseExpiry, spiHelperStartingRevID, null)
   // Update to the latest revision ID
   spiHelperStartingRevID = await spiHelperGetPageRev(spiHelperPageName)
